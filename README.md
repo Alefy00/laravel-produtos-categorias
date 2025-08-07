@@ -1,61 +1,198 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📦 Sistema de Gerenciamento de Produtos e Categorias — Laravel 11
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este projeto foi desenvolvido como parte de um **desafio técnico** para avaliar conhecimentos em Laravel 11, organização de código, Blade Templates, autenticação e boas práticas.
 
-## About Laravel
+O sistema permite:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Gerenciar Categorias** (criar, listar, editar, excluir)
+- **Gerenciar Produtos** (criar, listar, editar, excluir)
+- Relacionar produtos a categorias
+- **Autenticação** manual (sem uso de starter kits)
+- Alterações de schema solicitadas:  
+  - Campo `order` em Categorias
+  - Campo `show_in_showcase` em Produtos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Funcionalidades
 
-## Learning Laravel
+### Autenticação
+- Tela de login customizada em Blade
+- Proteção de rotas com `middleware('auth')`
+- Apenas 1 usuário fixo criado manualmente no banco (via Tinker)
+- Logout
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Categorias
+- CRUD completo
+- Campo **order** para definir prioridade
+- Ordenação da listagem por `order` e depois `name`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Produtos
+- CRUD completo
+- Relacionamento `belongsTo` com Categorias
+- Campo **show_in_showcase** (checkbox) para indicar vitrine
+- Exibição “Sim/Não” na listagem
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Boas práticas implementadas
+- Uso de layout base `layouts.app` para herança no Blade
+- Validações com `validate()` nos Controllers
+- Mensagens de sucesso com `session('success')`
+- Evita N+1 queries com `with()`
+- Código organizado por contexto (Controllers, Models, Views)
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠 Tecnologias utilizadas
+- **Laravel 11**
+- **SQLite** (banco local para facilitar execução)
+- **Blade Templates**
+- PHP 8.2+
+- Composer
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📂 Estrutura de pastas relevante
+```
+app/
+ ├── Http/
+ │    ├── Controllers/
+ │    │    ├── Auth/LoginController.php
+ │    │    ├── CategoriaController.php
+ │    │    └── ProdutoController.php
+ │    └── Middleware/Authenticate.php
+ ├── Models/
+ │    ├── Categoria.php
+ │    └── Produto.php
+resources/
+ ├── views/
+ │    ├── layouts/app.blade.php
+ │    ├── auth/login.blade.php
+ │    ├── categorias/
+ │    │    ├── index.blade.php
+ │    │    ├── create.blade.php
+ │    │    └── edit.blade.php
+ │    └── produtos/
+ │         ├── index.blade.php
+ │         ├── create.blade.php
+ │         └── edit.blade.php
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ⚙️ Como rodar o projeto localmente
 
-## Code of Conduct
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/Alefy00/laravel-produtos-categorias.git
+cd laravel-produtos-categorias
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Instalar dependências
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+### 3. Configurar o `.env`
+Copie o `.env.example` para `.env`:
+```bash
+cp .env.example .env
+```
+Edite o `.env` para usar SQLite:
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Criar o arquivo do banco
+No Windows:
+```bash
+type nul > database\database.sqlite
+```
 
-## License
+### 5. Gerar a chave da aplicação
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Rodar as migrations
+```bash
+php artisan migrate
+```
+
+### 7. Criar o usuário fixo (via Tinker)
+```bash
+php artisan tinker
+```
+```php
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+User::create([
+    'name' => 'Admin',
+    'email' => 'admin@email.com',
+    'password' => Hash::make('12345678'),
+]);
+```
+Digite `exit` para sair do Tinker.
+
+### 8. Subir o servidor local
+```bash
+php artisan serve
+```
+Acesse no navegador:
+```
+http://127.0.0.1:8000/login
+```
+Credenciais padrão:
+- Email: `admin@email.com`
+- Senha: `12345678`
+
+---
+
+## 📌 Rotas principais
+- `/login` → tela de login
+- `/categorias` → CRUD de Categorias (protegido por login)
+- `/produtos` → CRUD de Produtos (protegido por login)
+- `/logout` → encerra sessão
+
+---
+
+## 📋 Checklist de requisitos do desafio
+
+### Estrutura inicial
+- [x] Laravel 11 instalado e configurado com SQLite
+- [x] Usuário fixo criado via Tinker
+
+### Autenticação
+- [x] Tela de login customizada (Blade)
+- [x] Proteção de rotas com `auth`
+- [x] Logout
+
+### Categorias
+- [x] CRUD completo
+- [x] Campo `order` adicionado e usado para ordenação
+
+### Produtos
+- [x] CRUD completo
+- [x] Relacionamento com Categoria
+- [x] Campo `show_in_showcase` adicionado
+
+### Boas práticas
+- [x] Uso de layout base
+- [x] Validações com mensagens de erro no Blade
+- [x] Mensagens de sucesso após ações
+- [x] Código organizado e claro
+
+---
+
+## 📝 Nota sobre alteração de schema (etapa adicional)
+Conforme solicitado, foi simulada uma alteração no banco:
+- Categoria: campo `order` adicionado
+- Produto: campo `show_in_showcase` adicionado
+
+Essas mudanças foram implementadas com migrations específicas, atualizações nos models, controllers, validações e views.
+
+---
+
+## 📄 Licença
+Este projeto foi desenvolvido para fins de avaliação técnica.
