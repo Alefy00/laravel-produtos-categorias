@@ -8,6 +8,7 @@
     <nav>
         <a href="{{ url('/dashboard') }}">Dashboard</a> |
         <a href="{{ route('categorias.index') }}">Categorias</a> |
+        <a href="{{ route('produtos.index') }}">Produtos</a> |
         <form action="{{ url('/logout') }}" method="POST" style="display:inline;">
             @csrf
             <button type="submit">Sair</button>
