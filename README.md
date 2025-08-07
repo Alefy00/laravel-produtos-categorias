@@ -46,38 +46,15 @@ O sistema permite:
 - **Laravel 11**
 - **SQLite** (banco local para facilitar execução)
 - **Blade Templates**
+- **TailwindCSS**
+- **Vite**
+- **Concurrently** (rodar servidor Laravel + build frontend juntos)
 - PHP 8.2+
 - Composer
+- Node.js 20+
 
 ---
 
-## 📂 Estrutura de pastas relevante
-```
-app/
- ├── Http/
- │    ├── Controllers/
- │    │    ├── Auth/LoginController.php
- │    │    ├── CategoriaController.php
- │    │    └── ProdutoController.php
- │    └── Middleware/Authenticate.php
- ├── Models/
- │    ├── Categoria.php
- │    └── Produto.php
-resources/
- ├── views/
- │    ├── layouts/app.blade.php
- │    ├── auth/login.blade.php
- │    ├── categorias/
- │    │    ├── index.blade.php
- │    │    ├── create.blade.php
- │    │    └── edit.blade.php
- │    └── produtos/
- │         ├── index.blade.php
- │         ├── create.blade.php
- │         └── edit.blade.php
-```
-
----
 
 ## ⚙️ Como rodar o projeto localmente
 
@@ -87,15 +64,16 @@ git clone https://github.com/Alefy00/laravel-produtos-categorias.git
 cd laravel-produtos-categorias
 ```
 
-### 2. Instalar dependências
+### 2. Instalar dependências PHP e Node
 ```bash
 composer install
+npm install
 ```
 
 ### 3. Configurar o `.env`
-Copie o `.env.example` para `.env`:
+Copie ou crie o `.env` para a raiz do projeto:
 ```bash
-cp .env.example .env
+cp .env
 ```
 Edite o `.env` para usar SQLite:
 ```env
@@ -135,10 +113,12 @@ User::create([
 ```
 Digite `exit` para sair do Tinker.
 
-### 8. Subir o servidor local
+### 8. Rodar o projeto com TailwindCSS ativo
 ```bash
-php artisan serve
+npm run serve
 ```
+Esse comando utiliza **concurrently** para rodar o servidor Laravel (`php artisan serve`) e o Vite (`npm run dev`) ao mesmo tempo.
+
 Acesse no navegador:
 ```
 http://127.0.0.1:8000/login
@@ -191,8 +171,3 @@ Conforme solicitado, foi simulada uma alteração no banco:
 - Produto: campo `show_in_showcase` adicionado
 
 Essas mudanças foram implementadas com migrations específicas, atualizações nos models, controllers, validações e views.
-
----
-
-## 📄 Licença
-Este projeto foi desenvolvido para fins de avaliação técnica.
