@@ -25,16 +25,18 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'        => ['required', 'string', 'max:255'],
-            'price'       => ['required', 'numeric', 'between:0,9999999.99'],
-            'category_id' => ['required', 'exists:categorias,id'],
+            'name'             => ['required', 'string', 'max:255'],
+            'price'            => ['required', 'numeric', 'between:0,9999999.99'],
+            'category_id'      => ['required', 'exists:categorias,id'],
+            'show_in_showcase' => ['sometimes', 'boolean'],
         ]);
+
+        $validated['show_in_showcase'] = $request->boolean('show_in_showcase');
 
         Produto::create($validated);
 
         return redirect()->route('produtos.index')->with('success', 'Produto criado com sucesso!');
     }
-
     public function edit(Produto $produto)
     {
         $categorias = Categoria::orderBy('name')->get();
@@ -44,10 +46,13 @@ class ProdutoController extends Controller
     public function update(Request $request, Produto $produto)
     {
         $validated = $request->validate([
-            'name'        => ['required', 'string', 'max:255'],
-            'price'       => ['required', 'numeric', 'between:0,9999999.99'],
-            'category_id' => ['required', 'exists:categorias,id'],
+            'name'             => ['required', 'string', 'max:255'],
+            'price'            => ['required', 'numeric', 'between:0,9999999.99'],
+            'category_id'      => ['required', 'exists:categorias,id'],
+            'show_in_showcase' => ['sometimes', 'boolean'],
         ]);
+
+        $validated['show_in_showcase'] = $request->boolean('show_in_showcase');
 
         $produto->update($validated);
 

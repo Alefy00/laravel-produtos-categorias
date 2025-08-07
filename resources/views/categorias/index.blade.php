@@ -14,7 +14,9 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Ordem</th>
                 <th>Ações</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -22,6 +24,7 @@
                 <tr>
                     <td>{{ $categoria->id }}</td>
                     <td>{{ $categoria->name }}</td>
+                    <td>{{ $categoria->order }}</td>
                     <td>
                         <a href="{{ route('categorias.edit', $categoria) }}">Editar</a>
 

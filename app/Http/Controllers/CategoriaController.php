@@ -9,10 +9,9 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::orderBy('created_at', 'desc')->get();
+        $categorias = Categoria::orderBy('order')->orderBy('name')->get();
         return view('categorias.index', compact('categorias'));
     }
-
     public function create()
     {
         return view('categorias.create');
@@ -21,7 +20,8 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'  => ['required', 'string', 'max:255'],
+            'order' => ['nullable', 'integer', 'min:0'],
         ]);
 
         Categoria::create($validated);
@@ -37,7 +37,8 @@ class CategoriaController extends Controller
     public function update(Request $request, Categoria $categoria)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'  => ['required', 'string', 'max:255'],
+            'order' => ['nullable', 'integer', 'min:0'],
         ]);
 
         $categoria->update($validated);

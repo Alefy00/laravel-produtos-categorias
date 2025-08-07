@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'order'];
+
+    protected $casts = [
+        'order' => 'integer',
+    ];
 
     public function produtos()
     {

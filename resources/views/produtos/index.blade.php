@@ -18,7 +18,9 @@
                 <th>Nome</th>
                 <th>Preço</th>
                 <th>Categoria</th>
+                <th>Vitrine?</th>
                 <th>Ações</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -28,6 +30,7 @@
                     <td>{{ $produto->name }}</td>
                     <td>R$ {{ number_format((float)$produto->price, 2, ',', '.') }}</td>
                     <td>{{ $produto->categoria?->name ?? '-' }}</td>
+                    <td>{{ $produto->show_in_showcase ? 'Sim' : 'Não' }}</td>
                     <td>
                         <a href="{{ route('produtos.edit', $produto) }}">Editar</a>
 

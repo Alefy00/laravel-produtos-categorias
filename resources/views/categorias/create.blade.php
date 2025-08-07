@@ -22,6 +22,12 @@
             <label for="name">Nome:</label><br>
             <input type="text" name="name" id="name" value="{{ old('name') }}" required>
         </div>
+        <div style="margin-top:8px;">
+            <label for="order">Ordem (número inteiro):</label><br>
+            <input type="number" name="order" id="order"
+                value="{{ old('order', isset($categoria) ? $categoria->order : 0) }}" min="0">
+        </div>
+
 
         <br>
 

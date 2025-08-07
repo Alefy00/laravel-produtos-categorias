@@ -27,6 +27,13 @@
             <label for="price">Preço (use ponto como separador decimal, ex: 1999.90):</label><br>
             <input type="number" step="0.01" name="price" id="price" value="{{ old('price') }}" required>
         </div>
+        <div style="margin-top:8px;">
+            <label>
+                <input type="checkbox" name="show_in_showcase" value="1"
+                    @checked(old('show_in_showcase', isset($produto) ? $produto->show_in_showcase : false))>
+                Mostrar na vitrine
+            </label>
+        </div>
 
         <div style="margin-top:8px;">
             <label for="category_id">Categoria:</label><br>
