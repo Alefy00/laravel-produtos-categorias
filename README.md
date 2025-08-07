@@ -71,9 +71,9 @@ npm install
 ```
 
 ### 3. Configurar o `.env`
-Copie ou crie o `.env` para a raiz do projeto:
+Copie o `.env.example` para `.env`:
 ```bash
-cp .env
+cp .env.example .env
 ```
 Edite o `.env` para usar SQLite:
 ```env
