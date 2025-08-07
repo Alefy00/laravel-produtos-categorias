@@ -17,7 +17,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // rotas protegidas
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', fn () => 'Você está logado!');
+    Route::get('/dashboard', fn () => view('dashboard.index'))->name('dashboard');
     Route::resource('categorias', CategoriaController::class)->except('show');
     Route::resource('produtos', ProdutoController::class)->except('show');
 });
